@@ -28,3 +28,8 @@ To mock a file and the apiRequest() function, we might write something like this
 const apiRequest = jest.fn(() => { return Promise.resolve({ status: '', data: {} }) })
 
 export default apiRequest
+
+## Mock Module Methods
+
+One of the methods is mockFunction.mockResolvedValueOnce() - which accepts a value that the next call to mockFunction()
+will resolve to.

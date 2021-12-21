@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# Learning Jest with React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# expect assertion function matches used in my language_spoken.test file
 
-## Available Scripts
+.ToEqual - Used to perform deep equality checks between objects .toBe - Similar to .toEqual() but is used to compare.
+primitive values(String, Number Boolean, etc..). .toContain - Used when we want to verify that an item is in an array.
+.toBeTruthy - Is used to verify whether a value is truthy or not. .not.toBeDefined - Used to verify that a position is
+NOT defined, in this case im verfifing that actualValue[3] is NOT defined.
 
-In the project directory, you can run:
+done() - Jest will wait until the done callback is called before it finishes the test.
 
-### `npm start`
+## Testing with a real REST API is not ideal for a few reasons
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+We aren't concerned about whether the third-party API works. Instead, we only care about whether or not the function
+that perfomrs the API calls works.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Incorporating REST API calls into our tests can create fragile tests that may fail simply due to network issues.
 
-### `npm test`
+If we were interacting with a production-grade database, we could accidentally alter offical data.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Mocks
 
-### `npm run build`
+A safer and more efficient way to write our tests would be to create mock functions that bypasses the API call and
+returns values that we control instead.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To mock a file and the apiRequest() function, we might write something like this
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+const apiRequest = jest.fn(() => { return Promise.resolve({ status: '', data: {} }) })
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+export default apiRequest
